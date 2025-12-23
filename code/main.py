@@ -24,12 +24,14 @@ class MainWindow(QMainWindow):
         # Create and arrange widgets and layout. Remove pass when complete.
         pass
         # TODO: Dealer Section with cards
-        #Hand
-        #Score
+        # Hand
+        # Score
+        self.d_score_label = QLabel("Total: ?")
         # TODO: Player Section with cards
-        #Hand
-        #Score
-        #  TODO: Buttons for hit, stand, new round
+        # Hand
+        # Score
+
+        # Buttons
         self.button_hit = QPushButton("Hit")
         self.button_hit.clicked.connect(self.on_hit)
         self.button_stand = QPushButton("Stand")
@@ -54,12 +56,12 @@ class MainWindow(QMainWindow):
             self.end_round()
 
     def on_stand(self):
-        #Shows dealer's cards
+        # Shows dealer's cards
         self.game.reveal_dealer_card()
-        #Dealer draws to 17
-        #TODO automatically finish the round if dealer has 21
+        # Dealer draws to 17
+        # TODO automatically finish the round if dealer has 21
         self.game.play_dealer_card()
-        #Shows dealer's cards
+        # Shows dealer's cards
         self.update_dealer_cards(full=True)
         self.end_round()
 
@@ -94,10 +96,11 @@ class MainWindow(QMainWindow):
                 self.add_card(self.dealerCardsLayout, card)
 
         # TODO: update relevant labels in response to dealer actions. Remove pass when complete
+        #full is true when the round is complete and the cards are shown
         if full:
-            pass
+            self.d_score_label.setText(f"Total: {self.game.dealer_total()}")
         else:
-            pass
+            self.d_score_label.setText(f"Total: ?")
 
     def new_round_setup(self):
         # TODO: Prepare a fresh visual layout
