@@ -27,19 +27,24 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(centralWidget)
         self.gameLayout = QVBoxLayout()
         centralWidget.setLayout(self.gameLayout)
+        #Win tracking
+        self.winsLabel = QLabel("Dealer: 0 Player: 0")
+        self.gameLayout.addWidget(self.winsLabel)
         # TODO: Dealer Section with cards
         # Hand
         # Score
         # Layout
         self.dealerCardsLayout = QHBoxLayout()
         self.gameLayout.addLayout(self.dealerCardsLayout)
-        self.d_score_label = QLabel("Total: ?")
+        self.d_total_label = QLabel("Total: ?")
+        self.gameLayout.addWidget(self.d_total_label)
         # TODO: Player Section with cards
         # Hand
         # Score
         self.playerCardsLayout = QHBoxLayout()
         self.gameLayout.addLayout(self.playerCardsLayout)
         self.p_total_label = QLabel("Total: 0")
+        self.gameLayout.addWidget(self.p_total_label)
 
         # Buttons
         self.button_hit = QPushButton("Hit")
@@ -75,7 +80,7 @@ class MainWindow(QMainWindow):
         self.add_card(self.playerCardsLayout, card)
         # Hand total update
         total = self.game.player_total()
-        self.p_total_label.setText(str(total))
+        self.p_total_label.setText(f"Total: {self.game.player_total()}")
 
         if self.game.player_total() > 21:
             self.end_round()
@@ -123,18 +128,16 @@ class MainWindow(QMainWindow):
         # TODO: update relevant labels in response to dealer actions. Remove pass when complete
         # full is true when the round is complete and the cards are shown
         if full:
-            self.d_score_label.setText(f"Total: {self.game.dealer_total()}")
+            self.d_total_label.setText(f"Total: {self.game.dealer_total()}")
         else:
-            self.d_score_label.setText(f"Total: ?")
+            self.d_total_label.setText(f"Total: ? + {self.game.card_value(self.game.dealer_hand[1])}")
 
     def new_round_setup(self):
         # TODO: Prepare a fresh visual layout
         self.clear_layout(self.dealerCardsLayout)
         self.clear_layout(self.playerCardsLayout)
         self.result_label.setText("")
-
         # TODO: update relevant labels (reset dealer and player totals)
-
         # TODO: display new cards for dealers and players
 
         self.game.deal_initial_cards()
@@ -145,6 +148,8 @@ class MainWindow(QMainWindow):
         # Dealer
         self.update_dealer_cards(full=False)
 
+        #Update player's score
+        self.p_total_label.setText(f"Total: {self.game.player_total()}")
         # TODO: enable buttons for Stand and Hit - Remove pass when complete
         self.button_hit.setEnabled(True)
         self.button_stand.setEnabled(True)
@@ -158,6 +163,8 @@ class MainWindow(QMainWindow):
         self.button_stand.setEnabled(False)
         winnermessage = self.game.decide_winner()
         self.result_label.setText(winnermessage)
+        #Update wins display
+        self.winsLabel.setText(f"Dealer: {self.game.dealerWins} Player: {self.game.playerWins}")
 
 
 # complete
