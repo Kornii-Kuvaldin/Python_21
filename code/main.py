@@ -121,13 +121,18 @@ class MainWindow(QMainWindow):
 
     def new_round_setup(self):
         # TODO: Prepare a fresh visual layout
+        self.clear_layout(self.dealerCardsLayout)
+        self.clear_layout(self.playerCardsLayout)
 
         # TODO: update relevant labels (reset dealer and player totals)
 
         # TODO: display new cards for dealers and players
 
         # TODO: enable buttons for Stand and Hit - Remove pass when complete
-        pass
+        self.button_hit.setEnabled(True)
+        self.button_stand.setEnabled(True)
+        self.button_newRound.setEnabled(False)
+
 
     def end_round(self):
         # TODO: Disable button actions after the round ends. Remove pass when complete
