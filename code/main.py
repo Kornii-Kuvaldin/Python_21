@@ -37,6 +37,8 @@ class MainWindow(QMainWindow):
         # TODO: Player Section with cards
         # Hand
         # Score
+        self.playerCardsLayout=QHBoxLayout()
+        self.gameLayout.addLayout(self.playerCardsLayout)
         self.p_score_label = QLabel("Total: 0")
 
         # Buttons
@@ -61,6 +63,7 @@ class MainWindow(QMainWindow):
 
 
         #  TODO: Trigger a new layout with a new round
+        self.new_round_setup()
 
     # BUTTON ACTIONS
 
