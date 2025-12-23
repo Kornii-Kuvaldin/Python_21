@@ -1,4 +1,4 @@
-from PyQt6.QtWidgets import QApplication, QMainWindow, QLabel, QPushButton, QVBoxLayout, QHBoxLayout
+from PyQt6.QtWidgets import QApplication, QMainWindow, QLabel, QPushButton, QVBoxLayout, QHBoxLayout, QWidget
 from PyQt6.QtCore import Qt
 import sys
 
@@ -23,13 +23,21 @@ class MainWindow(QMainWindow):
     def initUI(self):
         # Create and arrange widgets and layout. Remove pass when complete.
         pass
+        centralWidget = QWidget()
+        self.setCentralWidget(centralWidget)
+        self.gameLayout = QVBoxLayout()
+        centralWidget.setLayout(self.gameLayout)
         # TODO: Dealer Section with cards
         # Hand
         # Score
+        #Layout
+        self.dealerCardsLayout = QHBoxLayout()
+        self.gameLayout.addLayout(self.dealerCardsLayout)
         self.d_score_label = QLabel("Total: ?")
         # TODO: Player Section with cards
         # Hand
         # Score
+        self.p_score_label = QLabel("Total: 0")
 
         # Buttons
         self.button_hit = QPushButton("Hit")
@@ -42,6 +50,15 @@ class MainWindow(QMainWindow):
         #  TODO: Feedback
 
         #  TODO: Add widgets to layout
+        #Layout
+
+        #Buttons
+        buttonLayout = QHBoxLayout()
+        buttonLayout.addWidget(self.button_newRound)
+        buttonLayout.addWidget(self.button_stand)
+        buttonLayout.addWidget(self.button_hit)
+        self.gameLayout.addLayout(buttonLayout)
+
 
         #  TODO: Trigger a new layout with a new round
 
@@ -60,7 +77,7 @@ class MainWindow(QMainWindow):
         self.game.reveal_dealer_card()
         # Dealer draws to 17
         # TODO automatically finish the round if dealer has 21
-        self.game.play_dealer_card()
+        self.game.play_dealer_turn()
         # Shows dealer's cards
         self.update_dealer_cards(full=True)
         self.end_round()
