@@ -28,8 +28,12 @@ class MainWindow(QMainWindow):
         # TODO: Player Section with cards
 
         #  TODO: Buttons for hit, stand, new round
-        self.button_hit = QPushButton(self)
+        self.button_hit = QPushButton("Hit")
         self.button_hit.clicked.connect(self.on_hit)
+        self.button_stand = QPushButton("Stand")
+        self.button_stand.clicked.connect(self.on_stand)
+        self.button_newRound = QPushButton("New Round")
+        self.button_newRound.clicked.connect(self.on_new_round)
 
         #  TODO: Feedback
 
