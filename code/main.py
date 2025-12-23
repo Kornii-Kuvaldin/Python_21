@@ -24,9 +24,11 @@ class MainWindow(QMainWindow):
         # Create and arrange widgets and layout. Remove pass when complete.
         pass
         # TODO: Dealer Section with cards
-
+        #Hand
+        #Score
         # TODO: Player Section with cards
-
+        #Hand
+        #Score
         #  TODO: Buttons for hit, stand, new round
         self.button_hit = QPushButton("Hit")
         self.button_hit.clicked.connect(self.on_hit)
@@ -52,8 +54,14 @@ class MainWindow(QMainWindow):
             self.end_round()
 
     def on_stand(self):
-        # TODO: Player ends turn; dealer reveals their hidden card and plays. Remove pass when complete
-        pass
+        #Shows dealer's cards
+        self.game.reveal_dealer_card()
+        #Dealer draws to 17
+        #TODO automatically finish the round if dealer has 21
+        self.game.play_dealer_card()
+        #Shows dealer's cards
+        self.update_dealer_cards(full=True)
+        self.end_round()
 
     def on_new_round(self):
         self.game.new_round()
