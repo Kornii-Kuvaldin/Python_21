@@ -53,9 +53,6 @@ class Game21:
         return [f"{rank}{suit}" for rank in ranks for suit in suits]
 
     def draw_card(self):
-        """
-        Return the next card in the shuffled deck.
-        """
         card = self.deck[self.deck_position]
         self.deck_position += 1
         return card
@@ -63,14 +60,6 @@ class Game21:
     # HAND VALUES + ACE HANDLING
 
     def card_value(self, card):
-        """
-        Convert a card string into its numeric value.
-
-        Rules:
-        - Number cards = their number (2–10)
-        - J, Q, K = 10
-        - A is normally 11, may later count as 1 if needed
-        """
         rank = card[:-1]  # everything except the suit symbol
 
         if rank in ["J", "Q", "K"]:
@@ -83,15 +72,6 @@ class Game21:
         return int(rank)
 
     def hand_total(self, hand):
-        """
-        Calculates the best possible total for a hand.
-        Aces are counted as 11 unless this would bust the hand,
-        in which case they are reduced to 1.
-
-        Suggested Process:
-        1. Count all Aces as 11 initially.
-        2. If total > 21, subtract 10 for each Ace, so it effectively makes them = 1
-        """
         total = sum(self.card_value(card) for card in hand)  # Adds all cards in a given hand
         # Ace count
         ace_count = sum(1 for card in hand if card.rank == 'A')
@@ -120,11 +100,11 @@ class Game21:
     def reveal_dealer_card(self):
         self.dealer_hidden_revealed = True
 
-    #Returns dealer total hand value
+    # Returns dealer total hand value
     def dealer_total(self):
         return self.hand_total(self.dealer_hand)
 
-    #Does the dealer's action. After the player passes, dealers draws until they hit at least 17
+    # Does the dealer's action. After the player passes, dealers draws until they hit at least 17
     def play_dealer_turn(self):
         while self.dealer_total() < 17:
             self.dealer_hand.append(self.draw_card())
@@ -134,7 +114,7 @@ class Game21:
     def decide_winner(self):
         playerTotal = self.player_total()
         dealerTotal = self.dealer_total()
-        #First check for busts, then check for who has a higher total
+        # First check for busts, then check for who has a higher total
         if playerTotal > 21:
             return "Player bust!"
         if dealerTotal > 21:
