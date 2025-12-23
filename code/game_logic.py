@@ -3,6 +3,9 @@ import random
 
 class Game21:
     def __init__(self):
+        # Score statistics
+        self.playerWins = 0
+        self.dealerWins = 0
         # Start immediately with a fresh round
         self.new_round()
 
@@ -74,7 +77,7 @@ class Game21:
     def hand_total(self, hand):
         total = sum(self.card_value(card) for card in hand)  # Adds all cards in a given hand
         # Ace count
-        ace_count = sum(1 for card in hand if "A" in card) #changed from rank check to not crash
+        ace_count = sum(1 for card in hand if "A" in card)  # changed from rank check to not crash
         # Bust handling
         # We will check if our current total with aces as 11 will bust as, and if they will, treat them as 1 while subtracting them from ace_count so they don't doubly add
         while ace_count > 0 and total > 21:
@@ -116,12 +119,16 @@ class Game21:
         dealerTotal = self.dealer_total()
         # First check for busts, then check for who has a higher total
         if playerTotal > 21:
+            self.dealerWins+=1
             return "Player bust!"
         if dealerTotal > 21:
+            self.playerWins+=1
             return "Dealer bust!"
         if playerTotal > dealerTotal:
+            self.playerWins+=1
             return "Player won!"
         elif dealerTotal > playerTotal:
+            self.dealerWins+=1
             return "Dealer won!"
         elif dealerTotal == playerTotal:
             return "Draw!"
