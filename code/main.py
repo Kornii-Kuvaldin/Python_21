@@ -39,7 +39,7 @@ class MainWindow(QMainWindow):
         # Score
         self.playerCardsLayout = QHBoxLayout()
         self.gameLayout.addLayout(self.playerCardsLayout)
-        self.p_score_label = QLabel("Total: 0")
+        self.p_total_label = QLabel("Total: 0")
 
         # Buttons
         self.button_hit = QPushButton("Hit")
@@ -50,6 +50,9 @@ class MainWindow(QMainWindow):
         self.button_newRound.clicked.connect(self.on_new_round)
 
         #  TODO: Feedback
+        # Won/Lost message
+        self.result_label = QLabel("")
+        self.gameLayout.addWidget(self.result_label)
 
         #  TODO: Add widgets to layout
         # Layout
@@ -70,6 +73,9 @@ class MainWindow(QMainWindow):
         # Player takes a card
         card = self.game.player_hit()
         self.add_card(self.playerCardsLayout, card)
+        # Hand total update
+        total = self.game.player_total()
+        self.p_total_label.setText(str(total))
 
         if self.game.player_total() > 21:
             self.end_round()
@@ -125,17 +131,18 @@ class MainWindow(QMainWindow):
         # TODO: Prepare a fresh visual layout
         self.clear_layout(self.dealerCardsLayout)
         self.clear_layout(self.playerCardsLayout)
+        self.result_label.setText("")
 
         # TODO: update relevant labels (reset dealer and player totals)
 
         # TODO: display new cards for dealers and players
 
         self.game.deal_initial_cards()
-        #Player
+        # Player
         # Visual update to display player's hand
         for card in self.game.player_hand:
             self.add_card(self.playerCardsLayout, card)
-        #Dealer
+        # Dealer
         self.update_dealer_cards(full=False)
 
         # TODO: enable buttons for Stand and Hit - Remove pass when complete
@@ -145,10 +152,12 @@ class MainWindow(QMainWindow):
 
     def end_round(self):
         # TODO: Disable button actions after the round ends. Remove pass when complete
+        # Toggle buttons
         self.button_newRound.setEnabled(True)
         self.button_hit.setEnabled(False)
         self.button_stand.setEnabled(False)
-        pass
+        winnermessage = self.game.decide_winner()
+        self.result_label.setText(winnermessage)
 
 
 # complete
