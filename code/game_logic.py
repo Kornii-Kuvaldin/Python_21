@@ -104,9 +104,11 @@ class Game21:
 
     # PLAYER ACTIONS
 
+    #Draws a card from a deck and adds it to the player's hand
     def player_hit(self):
-        # TODO: Add one card to the player's hand and return it, so the UI can display the card. Remove pass when complete.
-        pass
+        card = self.draw_card()
+        self.player_hand.append(card)
+        return card
 
     def player_total(self):
         # TODO: Return the player's total. Remove pass when complete.
