@@ -30,14 +30,14 @@ class MainWindow(QMainWindow):
         # TODO: Dealer Section with cards
         # Hand
         # Score
-        #Layout
+        # Layout
         self.dealerCardsLayout = QHBoxLayout()
         self.gameLayout.addLayout(self.dealerCardsLayout)
         self.d_score_label = QLabel("Total: ?")
         # TODO: Player Section with cards
         # Hand
         # Score
-        self.playerCardsLayout=QHBoxLayout()
+        self.playerCardsLayout = QHBoxLayout()
         self.gameLayout.addLayout(self.playerCardsLayout)
         self.p_score_label = QLabel("Total: 0")
 
@@ -52,15 +52,14 @@ class MainWindow(QMainWindow):
         #  TODO: Feedback
 
         #  TODO: Add widgets to layout
-        #Layout
+        # Layout
 
-        #Buttons
+        # Buttons
         buttonLayout = QHBoxLayout()
         buttonLayout.addWidget(self.button_newRound)
         buttonLayout.addWidget(self.button_stand)
         buttonLayout.addWidget(self.button_hit)
         self.gameLayout.addLayout(buttonLayout)
-
 
         #  TODO: Trigger a new layout with a new round
         self.new_round_setup()
@@ -116,7 +115,7 @@ class MainWindow(QMainWindow):
                 self.add_card(self.dealerCardsLayout, card)
 
         # TODO: update relevant labels in response to dealer actions. Remove pass when complete
-        #full is true when the round is complete and the cards are shown
+        # full is true when the round is complete and the cards are shown
         if full:
             self.d_score_label.setText(f"Total: {self.game.dealer_total()}")
         else:
@@ -130,12 +129,15 @@ class MainWindow(QMainWindow):
         # TODO: update relevant labels (reset dealer and player totals)
 
         # TODO: display new cards for dealers and players
+        self.game.deal_initial_cards()
+        # Visual update to display player's hand
+        for card in self.game.player_hand:
+            self.add_card(self.playerCardsLayout, card)
 
         # TODO: enable buttons for Stand and Hit - Remove pass when complete
         self.button_hit.setEnabled(True)
         self.button_stand.setEnabled(True)
         self.button_newRound.setEnabled(False)
-
 
     def end_round(self):
         # TODO: Disable button actions after the round ends. Remove pass when complete
