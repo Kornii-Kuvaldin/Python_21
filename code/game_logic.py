@@ -92,7 +92,7 @@ class Game21:
         1. Count all Aces as 11 initially.
         2. If total > 21, subtract 10 for each Ace, so it effectively makes them = 1
         """
-        total = sum(self.card_value(card) for card in hand) #Adds all cards in a given hand
+        total = sum(self.card_value(card) for card in hand)  # Adds all cards in a given hand
         # Ace count
         ace_count = sum(1 for card in hand if card.rank == 'A')
         # Bust handling
@@ -104,21 +104,21 @@ class Game21:
 
     # PLAYER ACTIONS
 
-    #Draws a card from a deck and adds it to the player's hand
+    # Draws a card from a deck and adds it to the player's hand
     def player_hit(self):
         card = self.draw_card()
         self.player_hand.append(card)
         return card
 
+    # Returns total value of player's hand
     def player_total(self):
-        # TODO: Return the player's total. Remove pass when complete.
-        pass
+        return self.hand_total(self.player_hand)
 
     # DEALER ACTIONS
 
+    # Set dealer's hidden status to True which will show the hand to player
     def reveal_dealer_card(self):
-        # TODO: Called when the player presses Stand. After this, the UI should show both dealer cards. Remove pass when complete.
-        pass
+        self.dealer_hidden_revealed = True
 
     def dealer_total(self):
         # TODO: Return the dealer's total. Remove pass when complete.
