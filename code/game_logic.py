@@ -120,9 +120,9 @@ class Game21:
     def reveal_dealer_card(self):
         self.dealer_hidden_revealed = True
 
+    #Returns dealer total hand value
     def dealer_total(self):
-        # TODO: Return the dealer's total. Remove pass when complete.
-        pass
+        return self.hand_total(self.dealer_hand)
 
     def play_dealer_turn(self):
         # TODO: Dealer must hit until their total is 17 or more, then stand.  Remove pass when complete.
