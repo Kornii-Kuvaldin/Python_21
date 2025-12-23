@@ -114,6 +114,9 @@ class MainWindow(QMainWindow):
 
     def end_round(self):
         # TODO: Disable button actions after the round ends. Remove pass when complete
+        self.button_newRound.setEnabled(True)
+        self.button_hit.setEnabled(False)
+        self.button_stand.setEnabled(False)
         pass
 
 
