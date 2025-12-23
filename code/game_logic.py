@@ -1,5 +1,6 @@
 import random
 
+
 class Game21:
     def __init__(self):
         # Start immediately with a fresh round
@@ -91,14 +92,14 @@ class Game21:
         1. Count all Aces as 11 initially.
         2. If total > 21, subtract 10 for each Ace, so it effectively makes them = 1
         """
-        total=0 #TODO
-        #Ace count
+        total = sum(self.card_value(card) for card in hand) #Adds all cards in a given hand
+        # Ace count
         ace_count = sum(1 for card in hand if card.rank == 'A')
-        #Bust handling
-        #We will check if our current total with aces as 11 will bust as, and if they will, treat them as 1 while subtracting them from ace_count so they don't doubly add
-        while ace_count > 0 and total >21:
-            total-=10
-            ace_count-=1
+        # Bust handling
+        # We will check if our current total with aces as 11 will bust as, and if they will, treat them as 1 while subtracting them from ace_count so they don't doubly add
+        while ace_count > 0 and total > 21:
+            total -= 10
+            ace_count -= 1
         return total
 
     # PLAYER ACTIONS
@@ -116,7 +117,6 @@ class Game21:
     def reveal_dealer_card(self):
         # TODO: Called when the player presses Stand. After this, the UI should show both dealer cards. Remove pass when complete.
         pass
-
 
     def dealer_total(self):
         # TODO: Return the dealer's total. Remove pass when complete.
@@ -138,4 +138,3 @@ class Game21:
         - "Dealer wins!"
         - "Push (tie)."
         """
-
