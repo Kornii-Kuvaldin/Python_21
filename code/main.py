@@ -129,10 +129,14 @@ class MainWindow(QMainWindow):
         # TODO: update relevant labels (reset dealer and player totals)
 
         # TODO: display new cards for dealers and players
+
         self.game.deal_initial_cards()
+        #Player
         # Visual update to display player's hand
         for card in self.game.player_hand:
             self.add_card(self.playerCardsLayout, card)
+        #Dealer
+        self.update_dealer_cards(full=False)
 
         # TODO: enable buttons for Stand and Hit - Remove pass when complete
         self.button_hit.setEnabled(True)
