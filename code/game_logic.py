@@ -132,12 +132,16 @@ class Game21:
     # WINNER DETERMINATION
 
     def decide_winner(self):
-        # TODO: Decide the outcome of the round.
-        """
-        Example: return the following text messages:
-        - "Player busts. Dealer wins!"
-        - "Dealer busts. Player wins!"
-        - "Player wins!"
-        - "Dealer wins!"
-        - "Push (tie)."
-        """
+        playerTotal = self.player_total()
+        dealerTotal = self.dealer_total()
+        #First check for busts, then check for who has a higher total
+        if playerTotal > 21:
+            return "Player bust!"
+        if dealerTotal > 21:
+            return "Dealer bust!"
+        if playerTotal < dealerTotal:
+            return "Player won!"
+        elif dealerTotal < playerTotal:
+            return "Dealer won!"
+        elif dealerTotal == playerTotal:
+            return "Draw!"
