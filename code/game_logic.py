@@ -119,9 +119,9 @@ class Game21:
             return "Player bust!"
         if dealerTotal > 21:
             return "Dealer bust!"
-        if playerTotal < dealerTotal:
+        if playerTotal > dealerTotal:
             return "Player won!"
-        elif dealerTotal < playerTotal:
+        elif dealerTotal > playerTotal:
             return "Dealer won!"
         elif dealerTotal == playerTotal:
             return "Draw!"
