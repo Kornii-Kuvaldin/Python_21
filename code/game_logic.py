@@ -74,7 +74,7 @@ class Game21:
     def hand_total(self, hand):
         total = sum(self.card_value(card) for card in hand)  # Adds all cards in a given hand
         # Ace count
-        ace_count = sum(1 for card in hand if card.rank == 'A')
+        ace_count = sum(1 for card in hand if "A" in card) #changed from rank check to not crash
         # Bust handling
         # We will check if our current total with aces as 11 will bust as, and if they will, treat them as 1 while subtracting them from ace_count so they don't doubly add
         while ace_count > 0 and total > 21:

@@ -1,14 +1,16 @@
-from PyQt6.QtWidgets import QApplication, QMainWindow, QLabel
+from PyQt6.QtWidgets import QApplication, QMainWindow, QLabel, QPushButton, QVBoxLayout, QHBoxLayout
 from PyQt6.QtCore import Qt
 import sys
 
 # this project should use a modular approach - try to keep UI logic and game logic separate
 from game_logic import Game21
 
+
 class MainWindow(QMainWindow):
 
     def __init__(self):
         super().__init__()
+        self.playerCardsLayout = QHBoxLayout()
         self.setWindowTitle("Game of 21")
 
         # set the windows dimensions
@@ -26,13 +28,14 @@ class MainWindow(QMainWindow):
         # TODO: Player Section with cards
 
         #  TODO: Buttons for hit, stand, new round
+        self.button_hit = QPushButton(self)
+        self.button_hit.clicked.connect(self.on_hit)
 
         #  TODO: Feedback
 
         #  TODO: Add widgets to layout
 
         #  TODO: Trigger a new layout with a new round
-
 
     # BUTTON ACTIONS
 
@@ -42,8 +45,7 @@ class MainWindow(QMainWindow):
         self.add_card(self.playerCardsLayout, card)
 
         if self.game.player_total() > 21:
-          # TODO: what should happen if a player goes over 21? Remove pass when complete
-          pass
+            self.end_round()
 
     def on_stand(self):
         # TODO: Player ends turn; dealer reveals their hidden card and plays. Remove pass when complete
@@ -75,7 +77,7 @@ class MainWindow(QMainWindow):
 
         for i, card in enumerate(self.game.dealer_hand):
             if i == 0 and not full:
-                self.add_card(self.dealerCardsLayout, "??")   # face-down
+                self.add_card(self.dealerCardsLayout, "??")  # face-down
             else:
                 self.add_card(self.dealerCardsLayout, card)
 
@@ -94,7 +96,6 @@ class MainWindow(QMainWindow):
 
         # TODO: enable buttons for Stand and Hit - Remove pass when complete
         pass
-
 
     def end_round(self):
         # TODO: Disable button actions after the round ends. Remove pass when complete
