@@ -124,9 +124,10 @@ class Game21:
     def dealer_total(self):
         return self.hand_total(self.dealer_hand)
 
+    #Does the dealer's action. After the player passes, dealers draws until they hit at least 17
     def play_dealer_turn(self):
-        # TODO: Dealer must hit until their total is 17 or more, then stand.  Remove pass when complete.
-        pass
+        while self.dealer_total() < 17:
+            self.dealer_hand.append(self.draw_card())
 
     # WINNER DETERMINATION
 
