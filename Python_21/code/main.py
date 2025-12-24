@@ -79,6 +79,7 @@ class MainWindow(QMainWindow):
         controlsBox.setLayout(controlsLayout)
 
         self.p_total_label = QLabel("Total: 0")
+
         self.p_total_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.p_total_label.setStyleSheet("""
             font-size: 26px;
@@ -142,6 +143,7 @@ class MainWindow(QMainWindow):
 
         self.new_round_setup()
         controlsLayout.addWidget(self.p_total_label, alignment=Qt.AlignmentFlag.AlignCenter) # control style layout of game
+
 
     # BUTTON ACTIONS
     # Method to label the Infor
@@ -209,6 +211,7 @@ class MainWindow(QMainWindow):
         label.setPixmap(pix)
         label.setProperty("card", True)
         layout.addWidget(label)
+        self.p_total_label.setText(str(self.game.player_total()))
 
     #update the information from dealer
     def update_dealer_cards(self, full=False):
@@ -230,9 +233,11 @@ class MainWindow(QMainWindow):
 
     def new_round_setup(self):
         #method to setup new round getting labels
+
         self.clear_layout(self.dealerCardsLayout)
         self.clear_layout(self.playerCardsLayout)
         self.result_label.setText("")
+        self.p_total_label.setText(str(self.game.player_total()))
 
 
 
